@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Demo | KtCaptcha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #8CC3E4;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      padding: 20px;
+    }
+
+    form {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 300px;
+      width: 100%;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    button {
+      background: #4caf50;
+      color: white;
+      border: none;
+    }
+
+    .captcha {
+      margin-top: 15px;
+      padding: 15px;
+      background: #f9f9f9;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .captcha.certo {
+      background-color: #d4edda;
+      border-color: #4caf50;
+    }
+
+    .captcha.errado {
+      background-color: #f8d7da;
+      border-color: #f44336;
+    }
+
+    #msg {
+      font-size: 14px;
+      margin-top: 8px;
+    }
+  </style>
+</head>
+<body>
+  <form onsubmit="return feito">
+    <input type="text" name="email" placeholder="Seu email" required>
+    <div class="captcha" id="captchaBox">
+      <label>Digite: <b>Kiti Co.</b></label>
+      <input type="text" id="entrada" placeholder="...">
+      <button type="button" onclick="verificar()">✔ Verificar</button>
+      <div id="msg"></div>
+      <p style="margin-top: 10px; font-size: 12px;">powered by KtCaptcha</p>
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+
+  <script>
+    let feito = false;
+
+    function verificar() {
+      const valor = document.getElementById("entrada").value.trim();
+      const msg = document.getElementById("msg");
+      const box = document.getElementById("captchaBox");
+
+      box.classList.remove("certo", "errado");
+      void box.offsetWidth;
+
+      if (valor === "Kiti Co.") {
+        feito = true;
+        msg.textContent = "✅ Certinho!";
+        msg.style.color = "green";
+        box.classList.add("certo");
+      } else {
+        feito = false;
+        msg.textContent = "❌ Tá errado!";
+        msg.style.color = "red";
+        box.classList.add("errado");
+      }
+
+      console.log("Feito:", feito);
+    }
+  </script>
+</body>
+</html>
