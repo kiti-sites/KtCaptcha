@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Documentação | KtCaptcha</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: #111;
+      color: #f5f5f5;
+      font-family: sans-serif;
+      padding: 30px;
+      line-height: 1.6;
+    }
+
+    h1, h2 {
+      color: #00eaff;
+    }
+
+    code {
+      background: #222;
+      padding: 2px 4px;
+      border-radius: 4px;
+      color: #0ff;
+    }
+
+    pre {
+      background: #222;
+      padding: 10px;
+      overflow-x: auto;
+      border-radius: 6px;
+      color: #fff;
+    }
+
+    a {
+      color: #00eaff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <h1>📘 KtCaptcha - Documentação</h1>
+
+  <p>O <b>KtCaptcha</b> é um mini-captcha local pra você colocar no seu próprio site, sem depender de APIs externas.</p>
+
+  <h2>📥 Como usar</h2>
+  <p>Basta copiar o bloco abaixo dentro do seu formulário:</p>
+
+  <pre><code>&lt;form onsubmit="return feito"&gt;
+  &lt;input type="text" name="email" required&gt;
+  &lt;div id="captchaBox"&gt;
+    &lt;!-- captcha vai aqui --&gt;
+  &lt;/div&gt;
+  &lt;button type="submit"&gt;Enviar&lt;/button&gt;
+&lt;/form&gt;
+  </code></pre>
+
+  <h2>📜 Script necessário</h2>
+  <p>Coloque esse JS no final da página (depois do captcha):</p>
+
+  <pre><code>&lt;script&gt;
+let feito = false;
+
+function verificar() {
+  const valor = document.getElementById("entrada").value.trim();
+  const msg = document.getElementById("msg");
+  const box = document.getElementById("captchaBox");
+
+  box.classList.remove("certo", "errado");
+  void box.offsetWidth;
+
+  if (valor === "Kiti Co.") {
+    feito = true;
+    msg.textContent = "✅ Certinho!";
+    msg.style.color = "green";
+    box.classList.add("certo");
+  } else {
+    feito = false;
+    msg.textContent = "❌ Tá errado!";
+    msg.style.color = "red";
+    box.classList.add("errado");
+  }
+}
+&lt;/script&gt;
+</code></pre>
+
+  <h2>🧪 Exemplo visual</h2>
+  <p>Veja funcionando em <a href="demo.html">demo.html</a></p>
+</body>
+</html>
