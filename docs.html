@@ -46,45 +46,47 @@
   <h2>📥 Como usar</h2>
   <p>Basta copiar o bloco abaixo dentro do seu formulário:</p>
 
-  <pre><code>&lt;form onsubmit="return feito"&gt;
-  &lt;input type="text" name="email" required&gt;
-  &lt;div id="captchaBox"&gt;
-    &lt;!-- captcha vai aqui --&gt;
+  <pre><code>
+&lt;form onsubmit="return feito"&gt;
+  &lt;input type="text" name="email" placeholder="Seu email" required&gt;
+  &lt;div class="captcha" id="captchaBox"&gt;
+    &lt;label&gt;Digite: &lt;b&gt;Kiti Co.&lt;/b&gt;&lt;/label&gt;
+    &lt;input type="text" id="entrada" placeholder="..."&gt;
+    &lt;button type="button" onclick="verificar()"&gt;✔ Verificar&lt;/button&gt;
+    &lt;div id="msg"&gt;&lt;/div&gt;
+    &lt;p style="margin-top: 10px; font-size: 12px;"&gt;powered by KtCaptcha&lt;/p&gt;
   &lt;/div&gt;
   &lt;button type="submit"&gt;Enviar&lt;/button&gt;
 &lt;/form&gt;
-  </code></pre>
 
-  <h2>📜 Script necessário</h2>
-  <p>Coloque esse JS no final da página (depois do captcha):</p>
+&lt;script&gt;
+  let feito = false;
 
-  <pre><code>&lt;script&gt;
-let feito = false;
+  function verificar() {
+    const valor = document.getElementById("entrada").value.trim();
+    const msg = document.getElementById("msg");
+    const box = document.getElementById("captchaBox");
 
-function verificar() {
-  const valor = document.getElementById("entrada").value.trim();
-  const msg = document.getElementById("msg");
-  const box = document.getElementById("captchaBox");
+    box.classList.remove("certo", "errado");
+    void box.offsetWidth;
 
-  box.classList.remove("certo", "errado");
-  void box.offsetWidth;
+    if (valor === "Kiti Co.") {
+      feito = true;
+      msg.textContent = "✅ Certinho!";
+      msg.style.color = "green";
+      box.classList.add("certo");
+    } else {
+      feito = false;
+      msg.textContent = "❌ Tá errado!";
+      msg.style.color = "red";
+      box.classList.add("errado");
+    }
 
-  if (valor === "Kiti Co.") {
-    feito = true;
-    msg.textContent = "✅ Certinho!";
-    msg.style.color = "green";
-    box.classList.add("certo");
-  } else {
-    feito = false;
-    msg.textContent = "❌ Tá errado!";
-    msg.style.color = "red";
-    box.classList.add("errado");
+    console.log("Feito:", feito);
   }
-}
 &lt;/script&gt;
 </code></pre>
 
-  <h2>🧪 Exemplo visual</h2>
-  <p>Veja funcionando em <a href="demo.html">demo.html</a></p>
+
 </body>
 </html>
